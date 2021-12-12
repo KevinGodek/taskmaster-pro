@@ -151,7 +151,7 @@ $(".card .list-group").sortable({
     console.log("deactivate", this);
   },
   over: function(event) {
-    console.log("out", event.target);
+    console.log("over", event.target);
   },
   out: function(event) {
     console.log("out", event.target);
@@ -160,11 +160,12 @@ $(".card .list-group").sortable({
     // array to store the task data in
     var tempArr = [];
     // loop over current set of children in sortable list
-    $(this).children().each(function(){
+    $(this).children().each(function() {
       var text = $(this)
         .find("p")
         .text()
         .trim();
+        
       var date = $(this)
         .find("span")
         .text()
@@ -187,6 +188,20 @@ $(".card .list-group").sortable({
   }
 });
 
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function(event, ui) {
+    ui.draggable.remove();
+    console.log("drop");
+  },
+  over: function(event, ui) {
+    console.log("over");
+  },
+  out: function(event, ui) {
+    console.log("out");
+  }
+});
 
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function() {
